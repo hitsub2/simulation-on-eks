@@ -33,4 +33,4 @@ spec:
       ebs:
         volumeSize: 80Gi
         volumeType: gp3
-        snapshotID: snap-040c01b0324fef357
+        snapshotID: ${EBS_SNAPSHOT_ID}

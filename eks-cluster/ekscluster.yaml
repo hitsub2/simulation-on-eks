@@ -1,1 +1,39 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
 
+metadata:
+  name: tusimple-eks-simulation
+  region: us-east-1
+  version: '1.24'
+  tags:
+    karpenter.sh/discovery: tusimple-eks-simulation
+iam:
+  withOIDC: true
+  
+fargateProfiles:
+  - name: system
+    selectors:
+      - namespace: kube-system
+      - namespace: karpenter
+karpenter:
+  version: 'v0.25.0'
+  createServiceAccount: true
+  
+cloudWatch:
+  clusterLogging:
+    # enable specific types of cluster control plane logs
+    enableTypes: ["audit", "authenticator", "controllerManager"]
+  
+managedNodeGroups:
+  - name: bottlerocket-private-mng
+    instanceType: c5.large
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 8
+    amiFamily: Bottlerocket
+    privateNetworking: true 
+    bottlerocket:
+      enableAdminContainer: true
+      settings:
+        motd: "Hello, tusimple!"
