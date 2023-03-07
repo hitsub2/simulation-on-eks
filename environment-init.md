@@ -9,3 +9,14 @@
 * Click https://us-east-1.console.aws.amazon.com/cloud9/home/create
 * Name it eksworkshop, click Next.
 * Choose Other instance type, and select t3.medium for instance type, take all default values and click Create environment
+
+## 3.Launch a EKS with Nodegroups
+* Open a new Terminal in Cloud9. and run 
+![new terminal](screenshots/1-cluster-terminal.png)
+
+```bash
+git clone https://github.com/FrankieCheng/eksworkshopguide
+chmod +755 eksworkshopguide/*.sh
+. eksworkshopguide/eks-workshop-create-cluster.sh
+
+```
