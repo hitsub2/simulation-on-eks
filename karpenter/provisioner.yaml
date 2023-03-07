@@ -1,1 +1,36 @@
-
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: default
+spec:
+  requirements:
+    - key: "node.kubernetes.io/instance-type"
+      operator: In
+      values: ["m5.large", "m5.2xlarge"]
+  limits:
+    resources:
+      cpu: 1000
+  providerRef:
+    name: default
+  ttlSecondsAfterEmpty: 30
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: default
+spec:
+  subnetSelector:
+    karpenter.sh/discovery: tusimple-eks-simulation
+  securityGroupSelector:
+    karpenter.sh/discovery: tusimple-eks-simulation
+  amiFamily: Bottlerocket
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 2Gi
+        volumeType: gp3
+    - deviceName: /dev/xvdb
+      ebs:
+        volumeSize: 80Gi
+        volumeType: gp3
+        snapshotID: ${EBS_SNAPSHOT_ID}
