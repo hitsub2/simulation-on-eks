@@ -26,14 +26,9 @@ cloudWatch:
     enableTypes: ["audit", "authenticator", "controllerManager"]
   
 managedNodeGroups:
-  - name: bottlerocket-private-mng
-    instanceType: c5.large
-    desiredCapacity: 2
-    minSize: 2
-    maxSize: 8
-    amiFamily: Bottlerocket
+  - name: al2-private-mng
+    instanceType: t3.large
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 3
     privateNetworking: true 
-    bottlerocket:
-      enableAdminContainer: true
-      settings:
-        motd: "Hello, tusimple!"
