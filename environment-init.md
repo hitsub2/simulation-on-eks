@@ -12,7 +12,7 @@
 
 ## 3.Launch a EKS with Nodegroups
 * Open a new Terminal in Cloud9. and run 
-![new terminal](screenshots/1-cluster-terminal.png)
+![new terminal](screenshoots/1-cluster-terminal.png)
 
 ```bash
 git clone https://github.com/FrankieCheng/eksworkshopguide
