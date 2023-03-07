@@ -46,9 +46,11 @@ IMAGES="$1"
 set -u
 
 AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-}
+echo $AWS_DEFAULT_REGION
 AMI_ID=${AMI_ID:-/aws/service/bottlerocket/aws-k8s-1.24/x86_64/latest/image_id}
+echo $AMI_ID
 INSTANCE_TYPE=${INSTANCE_TYPE:-t2.small}
-
+echo $INSTANCE_TYPE
 if [ -z "${AWS_DEFAULT_REGION}" ]; then
     echo "Please set AWS region"
     exit 1
