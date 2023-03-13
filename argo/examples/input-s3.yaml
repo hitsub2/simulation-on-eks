@@ -43,4 +43,11 @@ spec:
     container:
       image: debian:latest
       command: [sh, -c]
+      resources:
+        requests:
+          memory: "1024Mi"
+          cpu: "1024m"
+        limits:
+          memory: "1024Mi"
+          cpu: "1024m"
       args: ["ls -l /my-artifact"]
