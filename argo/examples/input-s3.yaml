@@ -35,10 +35,10 @@ spec:
           # and 'secretKey', containing the base64 encoded credentials
           # to the bucket.
           accessKeySecret:
-            name: mybucket-credentials
+            name: my-s3-credentials
             key: accessKey
           secretKeySecret:
-            name: mybucket-credentials
+            name: my-s3-credentials
             key: secretKey
     container:
       image: debian:latest
