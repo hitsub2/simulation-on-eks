@@ -1223,12 +1223,16 @@ kind: Service
 metadata:
   name: argo-server
   namespace: argo
+  #annotations:
+  #  service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+  #  service.beta.kubernetes.io/aws-load-balancer-type: "external"
+  #  service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
 spec:
   ports:
   - name: web
     port: 2746
     targetPort: 2746
-  #type: NodePort
+  type: LoadBalancer
   selector:
     app: argo-server
 ---
@@ -1255,9 +1259,7 @@ spec:
       containers:
       - args:
         - server
-        env:
-          - name: BASE_HREF
-            value: /argo/
+        - --auth-mode=server
         image: quay.io/argoproj/argocli:v3.4.5
         name: argo-server
         ports:
@@ -1340,32 +1342,3 @@ spec:
       securityContext:
         runAsNonRoot: true
       serviceAccountName: argo
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: argo-app-new
-  namespace: argo
-  annotations:
-      alb.ingress.kubernetes.io/group.name: internal
-      alb.ingress.kubernetes.io/healthcheck-path: /argo
-      #alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-      alb.ingress.kubernetes.io/backend-protocol: HTTP
-      alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
-      alb.ingress.kubernetes.io/load-balancer-name: internal
-      alb.ingress.kubernetes.io/scheme: internal
-      #alb.ingress.kubernetes.io/tags: EKS=True
-      kubernetes.io/ingress.class: alb
-      alb.ingress.kubernetes.io/target-type: ip
-      #alb.ingress.kubernetes.io/backend-protocol-version: HTTPS
-spec:
-    rules:
-    - http:
-        paths:
-          - backend:
-              service:
-                name: argo-server
-                port:
-                  number: 2746
-            path: /*
-            pathType: ImplementationSpecific

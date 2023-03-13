@@ -23,22 +23,22 @@ spec:
           #   GCS: storage.googleapis.com
           #   Minio: my-minio-endpoint.default:9000
           endpoint: s3.amazonaws.com
-          bucket: my-bucket-name
-          key: path/in/bucket
+          bucket: originbucket-for
+          key: /
           # Specify the bucket region. Note that if you want Argo to figure out this automatically,
           # you can set additional statement policy that allows `s3:GetBucketLocation` action.
           # For details, check out: https://argoproj.github.io/argo-workflows/configure-artifact-repository/#configuring-aws-s3
-          region: us-west-2
+          region: us-east-1
           # accessKeySecret and secretKeySecret are secret selectors.
           # It references the k8s secret named 'my-s3-credentials'.
           # This secret is expected to have have the keys 'accessKey'
           # and 'secretKey', containing the base64 encoded credentials
           # to the bucket.
           accessKeySecret:
-            name: my-s3-credentials
+            name: mybucket-credentials
             key: accessKey
           secretKeySecret:
-            name: my-s3-credentials
+            name: mybucket-credentials
             key: secretKey
     container:
       image: debian:latest
