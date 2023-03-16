@@ -6,7 +6,7 @@ spec:
   requirements:
     - key: "node.kubernetes.io/instance-type"
       operator: In
-      values: ["m5.large", "m5.2xlarge"]
+      values: ["t3.large", "t3.xlarge"]
   limits:
     resources:
       cpu: 1000
@@ -23,14 +23,8 @@ spec:
     karpenter.sh/discovery: tusimple-eks-simulation
   securityGroupSelector:
     karpenter.sh/discovery: tusimple-eks-simulation
-  amiFamily: Bottlerocket
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
-        volumeSize: 2Gi
+        volumeSize: 20Gi
         volumeType: gp3
-    - deviceName: /dev/xvdb
-      ebs:
-        volumeSize: 80Gi
-        volumeType: gp3
-        snapshotID: snap-040c01b0324fef357
