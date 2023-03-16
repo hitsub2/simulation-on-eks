@@ -6,7 +6,7 @@ spec:
   requirements:
     - key: "node.kubernetes.io/instance-type"
       operator: In
-      values: ["t3.large", "t3.small"]
+      values: ["t3.large", "t3.small", "m5.large"]
   limits:
     resources:
       cpu: 1000
