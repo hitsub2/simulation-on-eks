@@ -116,6 +116,8 @@ aws ec2 wait snapshot-completed --snapshot-ids "$SNAPSHOT_ID" > /dev/null && ech
 echo "[6/6] Cleanup."
 aws cloudformation delete-stack --stack-name "Bottlerocket-ebs-snapshot"
 
+sed -i "s/SNAPSHOT/$SNAPSHOT_ID/g" ~/environment/simulation-on-eks/karpenter/provisioner.yaml
+
 # done!
 echo "--------------------------------------------------"
 echo "All done! Created snapshot in $AWS_DEFAULT_REGION: $SNAPSHOT_ID"
