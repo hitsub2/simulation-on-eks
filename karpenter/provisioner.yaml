@@ -13,6 +13,8 @@ spec:
   providerRef:
     name: default
   ttlSecondsAfterEmpty: 30
+  labels:
+    billing-team: simulation-team
 ---
 apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
