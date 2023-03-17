@@ -116,7 +116,7 @@ aws ec2 wait snapshot-completed --snapshot-ids "$SNAPSHOT_ID" > /dev/null && ech
 echo "[6/6] Cleanup."
 aws cloudformation delete-stack --stack-name "Bottlerocket-ebs-snapshot"
 
-sed -i "s/SNAPSHOT/$SNAPSHOT_ID/g" ~/environment/simulation-on-eks/karpenter/provisioner.yaml
+sed -i "s/SNAPSHOT/$SNAPSHOT_ID/g" ~/environment/simulation-on-eks/karpenter/provisioner-bottlerocket.yaml
 
 # done!
 echo "--------------------------------------------------"
