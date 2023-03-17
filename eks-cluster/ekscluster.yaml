@@ -28,7 +28,7 @@ cloudWatch:
 managedNodeGroups:
   - name: al2-private-mng
     instanceType: t3.large
-    desiredCapacity: 1
-    minSize: 1
+    desiredCapacity: 2
+    minSize: 2
     maxSize: 3
     privateNetworking: true 
